@@ -1,18 +1,11 @@
 import Database from 'better-sqlite3'
 
-const connection = () => {
-
-  const db = new Database('./database/db.db')
-  return db
-}
+const connection = () => {return new Database('./database/db.db')}
 
 export const addNew = (id, url) => {
   const sql = `INSERT INTO redirects VALUES (@id, @url)`
   const stmt = connection().prepare(sql)
-  stmt.run({
-    "id": id,
-    "url": url
-  })
+  stmt.run({"id": id, "url": url})
 }
 
 export const lookup = (id) => {
@@ -20,7 +13,9 @@ export const lookup = (id) => {
   return connection().prepare(sql).get(id) 
 }
 
-export const test = () => {
-  const sql = `SELECT * FROM sqlite_master`
-  console.log(connection().prepare(sql).all())
-}
+export const doesIDExist = (id) => {
+  const sql = `SELECT EXISTS (SELECT * FROM redirects WHERE id = ?)`
+  const res = connection().prepare(sql).get(id)
+  return !!res[Object.keys(res)]
+} 
+
