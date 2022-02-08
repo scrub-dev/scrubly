@@ -1,7 +1,7 @@
 import express from "express";
 import figlet from "figlet";
 import config from "./config.js";
-import { addNew, doesIDExist, lookup } from "./database/functions.js";
+import { addNew, doesIDExist, incrementHitsCount, lookup, getHitsCount } from "./database/functions.js";
 import { initialise } from "./database/initialise.js";
 import { makeid } from "./makeid.js";
 const app = express()
@@ -36,7 +36,13 @@ app.get(apiRegex, (req, res) => {
 
 app.get(redirectRegex, (req, res) => {
   const x = lookup(req.path.substring(3))
+  if(x === undefined) return res.send("<h1>Invalid Link</h1>")
+  incrementHitsCount(req.path.substring(3))
   res.redirect(x.url)
+})
+
+app.get(statisticsRegex, (req, res) => {
+  res.json({hits: getHitsCount(req.path.substring(7))})
 })
 
 app.listen(config.port, () => {
