@@ -1,13 +1,14 @@
 import express from "express";
 import figlet from "figlet";
-import { addNew, doesIDExist, lookup } from "./database/databaseConnection.js";
+import config from "./config.js";
+import { addNew, doesIDExist, lookup } from "./database/functions.js";
+import { initialise } from "./database/initialise.js";
 import { makeid } from "./makeid.js";
 const app = express()
-const port = 9000
 
 const apiRegex = /api/
 const redirectRegex = /r\/.+/
-
+const statisticsRegex = /stats\/([a-z]+)?/i
 
 app.get(apiRegex, (req, res) => {
   if(!req.query.url) return res.json({status: "FAILED", message: "No URL Provided to create a link for!"})
@@ -38,9 +39,11 @@ app.get(redirectRegex, (req, res) => {
   res.redirect(x.url)
 })
 
-app.listen(port, () => {
-  console.log(figlet.textSync("Scrubly") 
-  + "v0.1" 
-  + "\nLink Shortner API Service" 
-  + "\nRunning on Port: " + port)
+app.listen(config.port, () => {
+  console.log(figlet.textSync(config.name) 
+  + "v" + config.version 
+  + "\n[ API ] Link Shortner API Service" 
+  + "\n[ API ] Running on Port: " + config.port)
+
+  initialise()
 })

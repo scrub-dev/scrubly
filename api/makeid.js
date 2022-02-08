@@ -1,5 +1,3 @@
-import { doesIDExist } from "./database/databaseConnection.js"
-
 export let makeid = (length) => {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
   let output = ""

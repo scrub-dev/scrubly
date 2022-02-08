@@ -1,7 +1,4 @@
-import Database from 'better-sqlite3'
-
-const connection = () => {return new Database('./database/db.db')}
-
+import { connection } from "./connection.js"
 export const addNew = (id, url) => {
   const sql = `INSERT INTO redirects VALUES (@id, @url)`
   const stmt = connection().prepare(sql)
