@@ -9,6 +9,7 @@ export const initialise = () => {
   if(!doesDatabaseFileExist()){
     createDatabaseFile()
   }
+  createRequiredTables()
 }
 
 const shouldExecute = () => {
@@ -18,12 +19,15 @@ const doesDatabaseFileExist = () => {}
 const createDatabaseFile = () => {
   devMessage("Created new Database File")
   createDatabaseFolder()
+
+  const databaseName = config.DATABASE_CONFIG.DATABASE_FOLDER + config.DATABASE_CONFIG.DATABASE_NAME
+  fs.writeFileSync(databaseName, '', (err) => {if(err) throw err})
 }
 const removeDatabaseFile = () => {
   devMessage("Removing previous Database File")
 }
 const createDatabaseFolder = () => {
-
+  if(!fs.existsSync(config.DATABASE_CONFIG.DATABASE_FOLDER)) fs.mkdirSync(config.DATABASE_CONFIG.DATABASE_FOLDER)
 }
 const doesTableExist = () => {
 
