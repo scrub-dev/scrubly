@@ -46,7 +46,6 @@ const createStatEntry = (id) => {
   const table = config.DATABASE_CONFIG.TABLES.TABLE_STATISTICS.name
   const schema = config.DATABASE_CONFIG.TABLES.TABLE_STATISTICS.schema
   const sql = `INSERT INTO ${table} VALUES ${generateFromSchemaWithoutTypeWithCharPrefix(schema, "@")}`
-  console.log(sql)
   connection().prepare(sql).run({"id": id, "hits": 0})
 }
 
