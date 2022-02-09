@@ -7,7 +7,9 @@ export default {
     CLEAN_DB_ON_START: true,
     OUTPUT_DEV_MESSAGES: true,
     OUTPUT_HITS_TO_CLI: false,
-    OUTPUT_NEW_LINKS_TO_CLI: false
+    OUTPUT_NEW_LINKS_TO_CLI: false,
+    OUTPUT_HITS_TO_LOG: true,
+    OUTPUT_NEW_LINKS_TO_LOG: true
   },
   DATABASE_CONFIG: {
     DATABASE_NAME: "db.db",
@@ -25,6 +27,14 @@ export default {
         schema: {
           id: "TEXT",
           hits: "INT"
+        }
+      },
+      TABLE_LOGS: {
+        name: "logs",
+        schema: {
+          id: "INT",
+          timestamp: "TEXT",
+          message: "TEXT"
         }
       }
     }

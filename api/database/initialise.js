@@ -32,13 +32,13 @@ const createDatabaseFolder = () => {
   if(!fs.existsSync(config.DATABASE_CONFIG.DATABASE_FOLDER)) fs.mkdirSync(config.DATABASE_CONFIG.DATABASE_FOLDER)
 }
 
-const doesTableExist = (table) => {
+export const doesTableExist = (table) => {
   const sql = `SELECT EXISTS (SELECT * from sqlite_master WHERE type = 'table' and name = ?)`
   const res = connection().prepare(sql).get(table)
   return !!res[Object.keys(res)]
 }
 
-const createRequiredTables = () => {
+export const createRequiredTables = () => {
   getTableNames().forEach(e => {
     if(!doesTableExist()){
       const table = getTableData(e)
@@ -47,7 +47,7 @@ const createRequiredTables = () => {
   })
 }
 
-const getTableData = (name) => {
+export const getTableData = (name) => {
   const tables = config.DATABASE_CONFIG.TABLES
   for (const table of Object.entries(tables)) {
     if (table[1].name.toLowerCase() === name.toLowerCase()) return table[1]
@@ -55,14 +55,14 @@ const getTableData = (name) => {
   return false
 }
 
-const getTableNames = () => {
+export const getTableNames = () => {
   const tables = config.DATABASE_CONFIG.TABLES
   let output = []
   for(const table of Object.entries(tables)) output.push(table[1].name)
   return output
 }
 
-const generateTableFromSchema = (tableColumns) => {
+export const generateTableFromSchema = (tableColumns) => {
   let columns = []
   for(const [name, type] of Object.entries(tableColumns)){
     columns.push(`${name.toLowerCase()} ${type.toUpperCase()}`)
@@ -70,7 +70,7 @@ const generateTableFromSchema = (tableColumns) => {
   return `(${columns.join(", ")})`
 }
 
-const createTable = (name, columns) => {
+export const createTable = (name, columns) => {
   let tableString =  `CREATE TABLE IF NOT EXISTS ${name}`
   tableString += generateTableFromSchema(columns)
   connection().exec(tableString)
