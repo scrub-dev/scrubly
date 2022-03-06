@@ -1,0 +1,156 @@
+:root{
+  --accent: #E40066;
+  --accent-hover:#a8004c;
+  --main: #546e7a;
+  --main2: #cfd8dc;
+  --main3: #2b3033;
+  --main4: #455a64;
+}
+
+body {
+  background-color: var(--main2);
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.footer{
+  background-color: var(--main4);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.main-bg {
+  background-color: var(--main);
+}
+
+.accent-underline {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 3px;
+}
+.accent-hover-underline {
+  border-bottom: 2px solid var(--accent-hover);
+  padding-bottom: 3px;
+}
+
+.slight-margin {
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+}
+
+.ow-my-head {
+  margin-top: 2em;
+}
+
+.slightly-more-margin {
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+}
+
+.button-accent {
+  padding: 0.2em;
+  background-color: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  box-shadow: var(--main3) 0.3em 0.3em;
+  text-decoration: none;
+}
+.button-accent:hover {
+  background-color: var(--accent-hover);
+  color: white;
+  box-shadow: var(--main3) 0.1em 0.1em;
+  text-decoration: none;
+}
+
+.image-center {
+  display: flex;
+  justify-content: center;
+}
+
+.homepage-image {
+  width: 30vw;
+  box-shadow: var(--main3) 0.3em 0.3em;
+  transition-duration: 0.2s;
+  border: 5px solid var(--accent);
+}
+.homepage-image:hover {
+  width: 33vw;
+  border: 5px solid var(--accent-hover);
+}
+
+.full {
+  width: 100%;
+}
+
+.tall {
+  height: 90vh ;
+}
+
+.resize {
+  overflow: hidden;
+}
+
+.top-padding {
+  margin-top: 0.5em;
+}
+
+input::placeholder{
+  color: grey;
+}
+
+label {
+  color: grey;
+}
+
+.center-div{
+  margin: auto;
+  width: 50%;
+  position: relative;
+}
+.centered{
+  margin: 0 auto;
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  transform: translateY(-50%, -50%);
+}
+.show-on-large{
+  display: none !important;
+}
+
+.button-spacing {
+  margin-left: 4em;
+}
+
+.btn-flat:hover {
+  color: white !important;
+  background-color: #4db6ac !important;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1110px){
+  .show-on-mobile{
+    display:block !important;
+  }
+}
+.show-on-mobile{
+  display:none !important;
+}
+@media only screen and (max-width: 1110px){
+  .hide-on-mobile {
+    display: none;
+  }
+  .show-on-mobile{
+    display:block !important;
+  }
+}

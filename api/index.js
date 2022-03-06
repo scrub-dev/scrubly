@@ -42,7 +42,7 @@ app.get(redirectRegex, (req, res) => {
 })
 
 app.get(statisticsRegex, (req, res) => {
-  if(doesStatEntryExist(id)) return res.json({hits: getHitsCount(req.path.substring(7))})
+  if(doesStatEntryExist(id)) return res.json({status: "SUCCESS", hits: getHitsCount(req.path.substring(7))})
   else return res.json({status: "FAILED", message: "Invalid Link"})
 })
 
