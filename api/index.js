@@ -1,7 +1,7 @@
 import express from "express";
 import figlet from "figlet";
 import config from "./config.js";
-import { addNew, doesIDExist, incrementHitsCount, lookup, getHitsCount } from "./database/functions.js";
+import { addNew, doesIDExist, incrementHitsCount, lookup, getHitsCount, doesStatEntryExist } from "./database/functions.js";
 import { initialise } from "./database/initialise.js";
 import { makeid } from "./makeid.js";
 import { newLogMessage } from "./utils.js";
@@ -13,7 +13,6 @@ const statisticsRegex = /stats\/([a-z]+)?/i
 
 app.get(apiRegex, (req, res) => {
   if(!req.query.url) return res.json({status: "FAILED", message: "No URL Provided to create a link for!"})
-
   let id = ""
   if(req.query.customlink){
     if(doesIDExist(req.query.customlink)) return res.json({status: "FAILED", message: "Custom Link already exists!"})
@@ -29,10 +28,8 @@ app.get(apiRegex, (req, res) => {
       }
     }
   }
-
-  let url = req.query.url
-  addNew(id, url)
-  newLogMessage(`NEW-${id}-${url}`, 'new')
+  addNew(id, req.query.url)
+  newLogMessage(`NEW-${id}-${req.query.url}`, 'new')
   res.json({id: id, status: "SUCCESS"})
 })
 
@@ -45,14 +42,11 @@ app.get(redirectRegex, (req, res) => {
 })
 
 app.get(statisticsRegex, (req, res) => {
-  res.json({hits: getHitsCount(req.path.substring(7))})
+  if(doesStatEntryExist(id)) return res.json({hits: getHitsCount(req.path.substring(7))})
+  else return res.json({status: "FAILED", message: "Invalid Link"})
 })
 
 app.listen(config.port, () => {
-  console.log(figlet.textSync(config.name) 
-  + "v" + config.version 
-  + "\n[ API ] Link Shortner API Service" 
-  + "\n[ API ] Running on Port: " + config.port)
-
+  console.log(figlet.textSync(config.name) + "v" + config.version + "\n[ API ] Link Shortner API Service" + "\n[ API ] Running on Port: " + config.port)
   initialise()
 })

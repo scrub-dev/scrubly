@@ -36,7 +36,7 @@ export const incrementHitsCount = (id) => {
   stmt.run({id: id, hits: getHitsCount(id) + 1})
 }
 
-const doesStatEntryExist = (id) => {
+export const doesStatEntryExist = (id) => {
   const table = config.DATABASE_CONFIG.TABLES.TABLE_STATISTICS.name
   const sql = `SELECT EXISTS (SELECT * FROM '${table}' WHERE id = ?)`
   const res = connection().prepare(sql).get(id)
