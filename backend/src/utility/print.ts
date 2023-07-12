@@ -8,7 +8,6 @@ const log = console.log
 const err = console.error
 
 export const print = (text: string, header?: string) => header ? log(`${header} ${text}`) : log(text)
-
 export const debugLog = (str: string) => {
     if(config.DEV_MODE && DEV_OPTIONS.PRINT_DEBUG_MESSAGES) print("[DEBUG]", str)
 }
@@ -41,10 +40,14 @@ export const printDevOptions = () => {
     print(`${chalk.bold("Developer Mode")} ${printBool(config.DEV_MODE)} \n`)
     if(!config.DEV_MODE) return
 
-    print(chalk.bold.blueBright.underline(`${evenPad("Value", maxPadLength, "end")} | ${evenPad("Value", padLength, "start")}`))
+    print(chalk.bold.blueBright.underline(`${evenPad("Option", maxPadLength, "end")} | ${evenPad("Value", padLength, "start")}`))
 
     let values = Object.values(DEV_OPTIONS)
     Object.keys(DEV_OPTIONS)
         .map((e,i) => [e, values[i]])
         .forEach(e => printDevOption(e[0], e[1], maxPadLength, padLength))
 }
+
+export const debugPrint = (str: string) => print(str, chalk.bold.magenta(`[DEBUG]`))
+export const iniPrint = (str: string) => print(str, chalk.bold.magenta(`[ INI ]`))
+export const errorPrint = (text: Error, ) =>  err(`${chalk.bold.red("[ERROR]")} ${text}`)

@@ -10,4 +10,6 @@ export interface TFigletOptions {
 export interface TDevOptions {
     PERSIST_DB: boolean,
     PRINT_DEBUG_MESSAGES: boolean,
+    PRINT_NEW_LINKS: boolean,
+    PRINT_LINK_USES: boolean
 }
