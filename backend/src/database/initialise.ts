@@ -1,31 +1,32 @@
 import fs from 'fs'
-
+import connection from './connection.js'
 
 import config from './config.js'
-import { log } from 'console'
-import { errorPrint } from '../utility/print.js'
+import {errorPrint, iniPrint } from '../utility/print.js'
 
 
 export const doesDBExist = () => fs.existsSync(config.DATABASE_DIR + config.DATABASE_NAME)
-
 export const deleteDatabase = () => {fs.unlinkSync(config.DATABASE_DIR + config.DATABASE_NAME)}
+const createDatabaseFile = () => fs.writeFileSync(config.DATABASE_DIR + config.DATABASE_NAME, '')
+const getTableList = () => config.TABLES.map(e => e.name)
 
-const createDatabase = () => {
-    fs.writeFileSync(config.DATABASE_DIR + config.DATABASE_NAME, '')
+export const createDatabase = () => {
+    createDatabaseFile()
+    getTableList().forEach(e => createTable(e, getTableDetails(e)));
 }
 
-export const initialise = () => {
-    createDatabase()
-    getTableList().forEach(e => {
-        log(e, getTableDetails(e))
-    });
-}
-const getTableList = () => {
-    return config.TABLES.map(e => e.name)
-}
+const createTable = (tableName: string, tableDetails: string[][] | undefined) => {
+    if(!tableDetails) return
 
-const createTable = () => {
+    let columns = []
+    for (let [name, type] of tableDetails){
+        columns.push(`${name.toLowerCase()} ${type.toUpperCase()}`)
+    }
+    let columnString = `(${columns.join(", ")})`
 
+    let tableString = `CREATE TABLE IF NOT EXISTS ${tableName} ${columnString}`
+    connection().exec(tableString)
+    iniPrint(`Creating Table: ${tableName}`)
 }
 
 const getTableDetails = (table: string) => {
