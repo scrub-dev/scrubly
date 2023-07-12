@@ -30,6 +30,6 @@ const createTable = () => {
 
 const getTableDetails = (table: string) => {
     let foundTable = config.TABLES.filter(e => e.name == table)
-    if(foundTable.length != 1) errorPrint(new Error("Invalid table operaion"))
+    if(foundTable.length != 1) errorPrint("Invalid table operation")
     else return foundTable[0].columns
 }

@@ -50,4 +50,4 @@ export const printDevOptions = () => {
 
 export const debugPrint = (str: string) => print(str, chalk.bold.magenta(`[DEBUG]`))
 export const iniPrint = (str: string) => print(str, chalk.bold.magenta(`[ INI ]`))
-export const errorPrint = (text: Error, ) =>  err(`${chalk.bold.red("[ERROR]")} ${text}`)
+export const errorPrint = (text: Error | string, ) =>  err(`${chalk.bold.red("[ERROR]")} ${text}`)
