@@ -12,5 +12,7 @@ export const DEV_OPTIONS: TDevOptions = {
     PERSIST_DB: false,
     PRINT_DEBUG_MESSAGES: true,
     PRINT_NEW_LINKS: true,
-    PRINT_LINK_USES: true
+    PRINT_LINK_USES: true,
+    SERVER_LOGGING: true,
+    VERBOSE_SERVER_LOGGING: false
 }

@@ -12,6 +12,8 @@ export interface TDevOptions {
     PRINT_DEBUG_MESSAGES: boolean,
     PRINT_NEW_LINKS: boolean,
     PRINT_LINK_USES: boolean
+    SERVER_LOGGING: boolean,
+    VERBOSE_SERVER_LOGGING: boolean
 }
 
 export type TLogType = "NEW_LINK" | "NEW_HIT" | "WARN" | "ERROR"

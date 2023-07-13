@@ -48,6 +48,10 @@ export const printDevOptions = () => {
         .forEach(e => printDevOption(e[0], e[1], maxPadLength, padLength))
 }
 
-export const debugPrint = (str: string) => print(str, chalk.bold.magenta(`[DEBUG]`))
+export const debugPrint = (str: string) => (config.DEV_MODE && DEV_OPTIONS.PRINT_DEBUG_MESSAGES) ? print(str, chalk.bold.magenta(`[DEBUG]`)) : ""
+export const debugWebPrint = (str: string) => (config.DEV_MODE && DEV_OPTIONS.PRINT_DEBUG_MESSAGES && DEV_OPTIONS.SERVER_LOGGING) ? print(str, chalk.bold.magenta(`[ WEB ]`)) : ""
 export const iniPrint = (str: string) => print(str, chalk.bold.magenta(`[ INI ]`))
 export const errorPrint = (text: Error | string, ) =>  err(`${chalk.bold.red("[ERROR]")} ${text}`)
+
+export const hitPrint = (text: string) => (config.DEV_MODE && DEV_OPTIONS.PRINT_LINK_USES) ? print(text, chalk.bold.green(`[ HIT ]`)) : ""
+export const linkPrint = (text: string) => (config.DEV_MODE && DEV_OPTIONS.PRINT_LINK_USES) ? print(text, chalk.bold.green(`[ NEW ]`)) : ""
