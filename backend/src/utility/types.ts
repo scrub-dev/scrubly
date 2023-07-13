@@ -13,3 +13,5 @@ export interface TDevOptions {
     PRINT_NEW_LINKS: boolean,
     PRINT_LINK_USES: boolean
 }
+
+export type TLogType = "NEW_LINK" | "NEW_HIT" | "WARN" | "ERROR"

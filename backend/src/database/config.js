@@ -8,7 +8,7 @@ export default {
             url: "TEXT NOT NULL"
         },
         STATS: {
-            id: "int NOT NULL",
+            id: "INT NOT NULL",
             hits: "INT NOT NULL"
         },
         LOGS: {
