@@ -1,3 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { TNewLinkParams } from "./RouteTypes.js";
 
-export default (req: FastifyRequest, res: FastifyReply) => {}
+export default (req: FastifyRequest<{Querystring: TNewLinkParams}>, res: FastifyReply) => {
+
+}
