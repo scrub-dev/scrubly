@@ -28,8 +28,7 @@ export class Server {
 
     public listen = async () => {
         try {
-            await this.server.listen({port: this.port})
-            debugWebPrint(`Web Server Running @ ${this.port}`)
+            this.server.listen({port: this.port}, (err, address) => {if(err){errorPrint(err)} else debugWebPrint(`Web Server Running @ ${address}`)})
         }
         catch (err: any) {
             this.server.log.error(err)
