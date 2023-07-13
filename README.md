@@ -1,30 +1,22 @@
-# Scrubly
-###### Full Stack URL Shortner Project
+![scrubly](/assets/scrubly.png)
+##### A Fullstack url shortener
+###
 
----
-
-## Frontend
-
-React
-
----
+## Front End
+###
+Tech Stack
+```
+* React
+* Vite
+* SWC
+* Typescript
+```
 ## Backend
-
-Express
-
-### Endpoints
-
-##### /api
+###
+Tech Stack
 ```
-Accepted Parameters:
-
-?url=YOURLINK (Required)
-?customlink=CUSTOMLINK (Optional, between 1 char and 16 char length allowed)
+* Typescript
+* Node
+* Fasify
+* SQLite
 ```
-##### /r/\[link]
-Used to redirect using the link provided by /api
-
-##### /stats
-provides stats for how many times someone has used /r/\[link]
-
-
