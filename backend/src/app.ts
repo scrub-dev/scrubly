@@ -1,8 +1,8 @@
 import chalk from "chalk"
-import { debugPrint, figletText, iniPrint, print, printDevOptions } from "./utility/print.js"
-import config, { DEV_OPTIONS } from "./utility/config.js"
-import { createDatabase, deleteDatabase, doesDBExist } from "./database/initialise.js"
+import {figletText, print, printDevOptions } from "./utility/print.js"
+import config from "./utility/config.js"
 import { Server } from "./server/server.js"
+import { Database } from "./database/database.js"
 
 const printWelcome = () => {
   print(figletText(config.NAME) +" v"+ chalk.underline(config.VERSION))
@@ -13,20 +13,9 @@ const printWelcome = () => {
   print("")
 }
 
-const initaliseDatabase = () => {
-  if(!DEV_OPTIONS.PERSIST_DB && config.DEV_MODE) {
-    debugPrint("Removing previous database")
-    deleteDatabase()
-  }
-  if(!doesDBExist()){
-    iniPrint("Initalising database")
-    createDatabase()
-  }else iniPrint("Database already exists... skipping")
-}
-
 const run = () => {
   printWelcome()
-  initaliseDatabase()
+  Database.createDatabase()
   Server.getInstance().listen()
 }
 
