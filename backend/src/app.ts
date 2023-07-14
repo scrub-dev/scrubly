@@ -3,7 +3,6 @@ import {figletText, print, printDevOptions } from "./utility/print.js"
 import config from "./utility/config.js"
 import { Server } from "./server/server.js"
 import { Database } from "./database/database.js"
-import { generateSlug, sanitiseSlug, shuffleArray } from "./utility/slug.js"
 
 const printWelcome = () => {
   print(figletText(config.NAME) +" v"+ chalk.underline(config.VERSION))

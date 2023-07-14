@@ -9,6 +9,7 @@ export const createLink = (slug: string, link: string) => {
         .prepare(sqlText)
         .run({"slug":slug, "link":link})
 }
+
 export const slugExists = (slug: string) => {
     let sqlText = `
         SELECT COUNT(1)
@@ -18,6 +19,39 @@ export const slugExists = (slug: string) => {
         .prepare(sqlText)
         .get(slug)
 }
+
+export const linkExists = (link: string) => {
+    let sqlText = `
+        SELECT COUNT(1)
+        FROM REDIRECTS
+        WHERE link = ?`
+    return Database.getConn()
+        .prepare(sqlText)
+        .get(link)
+}
+
+export const getLink = (slug: string) => {
+    let sqlText = `
+        SELECT link
+        FROM REDIRECTS
+        WHERE slug = ?
+    `
+    return Database.getConn()
+        .prepare(sqlText)
+        .get(slug)
+}
+
+export const getSlug = (link: string) => {
+    let sqlText = `
+        SELECT slug
+        FROM REDIRECTS
+        WHERE link = ?
+    `
+    return Database.getConn()
+        .prepare(sqlText)
+        .get(link)
+}
+
 export const getLinks = () => {
     let sqlText = `
         SELECT * FROM REDIRECTS
