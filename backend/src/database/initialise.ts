@@ -1,5 +1,5 @@
 import fs from 'fs'
-import connection from './connection.js'
+import {Database} from './database.js'
 
 import config from './config.js'
 import {errorPrint, iniPrint } from '../utility/print.js'
@@ -25,7 +25,7 @@ const createTable = (tableName: string, tableDetails: string[][] | undefined) =>
     let columnString = `(${columns.join(", ")})`
 
     let tableString = `CREATE TABLE IF NOT EXISTS ${tableName} ${columnString}`
-    connection().exec(tableString)
+    Database.getConn().exec(tableString)
     iniPrint(`Creating Table: ${tableName}`)
 }
 
