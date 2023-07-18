@@ -19,7 +19,7 @@ export class Database {
     }
 
     public static createDatabase = () => {
-        if(!DEV_OPTIONS.PERSIST_DB && config_.DEV_MODE) {
+        if(!DEV_OPTIONS.PERSIST_DB && config_.DEV_MODE && doesDBExist()) {
             debugPrint("Removing previous database")
             deleteDatabase()
           }

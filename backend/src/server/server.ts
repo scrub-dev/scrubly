@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import config, { DEV_OPTIONS } from "../utility/config.js";
-import {debugWebPrint, errorPrint, hitPrint, iniPrint } from "../utility/print.js";
+import {debugWebPrint, errorPrint, iniPrint } from "../utility/print.js";
 import { RouteManager } from "./routes/routeManager.js";
 
 export class Server {

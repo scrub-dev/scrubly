@@ -17,6 +17,8 @@ export class RouteManager {
         const route_redirect = "/redirect"
         const route_stats    = "/stats"
 
+        const route_teapot   = "/teapot"
+
         this.server.get(route_default,async (req, res) => test(req,res))
 
         this.server.get<{Querystring: TNewLinkParams}>(route_api, async (req, res) => newLink(req,res))
@@ -24,5 +26,8 @@ export class RouteManager {
         this.server.get<{Querystring: TRedirectParams}>(route_redirect, async (req, res) => redirect(req,res))
 
         this.server.get<{Querystring: TStatsParams}>(route_stats, async (req, res) => getStats(req,res))
+
+        // Meme Endpoints
+        this.server.get(route_teapot, async (req, res) => res.send({status: 418, message: "I am a teapot"}).code(418))
     }
 }
